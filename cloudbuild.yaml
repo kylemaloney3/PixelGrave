@@ -10,7 +10,7 @@ steps:
     '--region', 'us-central1',
     '--platform', 'managed',
     '--allow-unauthenticated',
-    '--set-env-vars', 'FLASK_APP=app'
+    '--set-env-vars', 'FLASK_APP=app.py,FLASK_ENV=production'
   ]
 images:
 - 'gcr.io/$PROJECT_ID/my-flask-app'
