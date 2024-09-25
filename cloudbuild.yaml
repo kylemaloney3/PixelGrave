@@ -12,8 +12,5 @@ steps:
     '--allow-unauthenticated',
     '--set-env-vars', 'FLASK_APP=app'
   ]
-- name: 'gcr.io/k8s-skaffold/pack'
-  dir: 'C:\Users\kylem\Documents\codingProjects\PixelGrave'
-  args: ['build', '-t', 'gcr.io/my-project/my-image', '.']
 images:
 - 'gcr.io/$PROJECT_ID/my-flask-app'
