@@ -22,6 +22,18 @@
         <a href="{{ url_for('tech_news') }}">Tech News</a>
         <a href="{{ url_for('game_articles') }}">Game Articles</a>
     </div>
+    <div class="dropdown">
+        <button class="dropbtn">Menu 
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('game_reviews') }}">Game Reviews</a>
+            <a href="{{ url_for('movie_reviews') }}">Movie & TV Reviews</a>
+            <a href="{{ url_for('tech_news') }}">Tech News</a>
+            <a href="{{ url_for('game_articles') }}">Game Articles</a>
+        </div>
+    </div>
     <h2 id="news-title">Tech News</h2>
     <div id="content-box">
         {% for article in articles %}
@@ -30,7 +42,7 @@
             <img id="article-img" src="{{ article.thumbnail }}" alt="{{ article.title }}">
             {% endif %}
             <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
-            <p>{{ article.summary }}</p>
+            <p>{{ article.summary | safe }}</p>
         </div>
         {% endfor %}
     </div>

@@ -3,6 +3,9 @@ body {
     background-color: #474c51;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header {
@@ -13,14 +16,20 @@ header {
     font-family: 'VT323', monospace;
     font-size: 2.5em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 0 auto;
 }
 
+/* Navbar container */
 #nav {
     background-color: rgb(76, 83, 98);
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 0 auto;
 }
 
+/* Links inside the navbar */
 #nav a {
     float: left;
     display: block;
@@ -31,9 +40,68 @@ header {
     transition: background-color 0.3s;
 }
 
+/* Add a background color to navbar links on hover */
 #nav a:hover {
     background-color: #009877;
     color: #fff;
+}
+
+/* Dropdown container */
+.dropdown {
+    display: none; /* Hide dropdown by default */
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: rgb(76, 83, 98);
+    font-family: inherit;
+    margin: 0;
+    padding: 14px 20px;
+    color: #fff;
+    text-align: center;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(76, 83, 98);
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.6s ease, max-height 0.6s ease; /* Slower transition */
+    max-height: 0;
+    overflow: hidden;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    float: none;
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    transition: background-color 0.3s;
+}
+
+/* Add a background color to dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #009877;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+    max-height: 500px; /* Adjust as needed */
 }
 
 h2 {
@@ -42,6 +110,10 @@ h2 {
     color: #ff9443;
     font-size: 48px;
     margin-top: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 10px;
 }
 
 #content-box {
@@ -49,6 +121,7 @@ h2 {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
     width: 80%;
+    max-width: 80%;
     margin: 20px auto;
     padding: 20px;
     background-color: #d2d2d2;
@@ -77,8 +150,8 @@ h2 {
     color: #009877;
     text-decoration: none;
     display: block;
-    margin-bottom: 10px;
     transition: color 0.3s;
+    line-height: 1.4;
 }
 
 .article a:hover {
@@ -88,7 +161,7 @@ h2 {
 .article p {
     font-size: 1.2em;
     color: #666;
-    line-height: 1.6;
+    line-height: 1.4;
 }
 
 .article video:empty {
@@ -100,4 +173,83 @@ h2 {
     max-width: 640px;
     height: auto;
     border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Media query for phone screens */
+@media (max-width: 600px) {
+    header {
+        font-size: 1.5em;
+        padding: 30px 0;
+    }
+
+    #nav {
+        display: none; /* Hide the regular nav on mobile */
+    }
+
+    .dropdown {
+        display: block; /* Show dropdown on mobile */
+    }
+
+    h2 {
+        font-size: 24px;
+        padding-top: 20px;
+    }
+
+    #content-box {
+        grid-template-columns: 1fr; /* Single column layout for small screens */
+        width: 100%;
+        padding: 10px;
+    }
+
+    .article {
+        padding: 10px;
+        margin: 0 0 10px 0;
+    }
+
+    .article a {
+        font-size: 1.5em;
+    }
+
+    .article p {
+        font-size: 1em;
+    }
+
+    .dropdown-content {
+        position: relative;
+    }
+}
+
+/* Media query for tablets and iPads */
+@media (min-width: 601px) and (max-width: 1024px) {
+    header {
+        font-size: 2.2em;
+        padding: 15px 0;
+    }
+
+    h2 {
+        font-size: 42px;
+    }
+
+    #content-box {
+        grid-template-columns: 1fr 1fr; /* Two columns for tablets */
+        width: 90%;
+        padding: 15px;
+    }
+
+    .article {
+        padding: 15px;
+    }
+
+    .article a {
+        font-size: 1.6em;
+    }
+
+    .article p {
+        font-size: 1.1em;
+    }
+
+    .dropdown-content {
+        position: relative;
+    }
 }

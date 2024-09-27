@@ -22,6 +22,18 @@
         <a href="{{ url_for('tech_news') }}">Tech News</a>
         <a href="{{ url_for('game_articles') }}">Game Articles</a>
     </div>
+    <div class="dropdown">
+        <button class="dropbtn">Menu 
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('game_reviews') }}">Game Reviews</a>
+            <a href="{{ url_for('movie_reviews') }}">Movie & TV Reviews</a>
+            <a href="{{ url_for('tech_news') }}">Tech News</a>
+            <a href="{{ url_for('game_articles') }}">Game Articles</a>
+        </div>
+    </div>
     <h2 id="news-title">Game Articles</h2>
     <div id="content-box">
         {% for article in articles %}
@@ -32,7 +44,7 @@
             <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
             <div class="article-summary">{{ article.summary | safe }}</div>
             {% if article.video %}
-            <video width="320" height="240" controls>
+            <video controls>
                 <source src="{{ article.video }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>

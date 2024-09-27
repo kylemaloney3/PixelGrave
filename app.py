@@ -36,7 +36,9 @@ def add_paragraphs(content):
         content = content.replace('</p><p dir="ltr">', '</p> <p dir="ltr">')
     return content
 
-
+def clean_html(content):
+    soup = BeautifulSoup(content, 'html.parser')
+    return str(soup)
 
 # Fetch articles #
 
@@ -48,10 +50,13 @@ def fetch_articles(rss_urls, include_video=False):
             summary = entry.summary
             formatted_summary = add_paragraphs(summary)  # Format the summary with paragraphs
 
+            # Clean the HTML content
+            cleaned_summary = clean_html(formatted_summary)
+
             article = {
                 'title': entry.title,
                 'link': entry.link,
-                'summary': formatted_summary,  # Use formatted summary here
+                'summary': cleaned_summary,  # Use cleaned summary here
                 'thumbnail': None,
                 'video': None
             }
@@ -68,6 +73,7 @@ def fetch_articles(rss_urls, include_video=False):
 
             articles.append(article)
     return articles
+
 
 # Routing pages #
 
@@ -97,5 +103,6 @@ def game_articles():
     return render_template('game_articles.html', articles=articles)
 
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port)
     app.run(debug=True)
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
