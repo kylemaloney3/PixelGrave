@@ -104,14 +104,16 @@ h2 {
 
 #content-box {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr !important;
     grid-gap: 20px;
     width: 80%;
+    max-width: 80%;
     margin: 20px auto;
     padding: 20px;
     background-color: #d2d2d2;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    align-items: start;
 }
 
 .article {
@@ -121,6 +123,7 @@ h2 {
     transition: background-color 0.3s, transform 0.3s;
     background-color: #fff;
     border-radius: 10px;
+    max-width: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -154,10 +157,50 @@ h2 {
 }
 
 #article-img {
-    width: 100%;
-    max-width: 640px;
-    height: auto;
-    border-radius: 10px;
+    width: 80% !important; /* Ensure images fit within the article */
+    max-width: 80% !important;
+    height: auto !important;
+    max-height: 550px !important;
+    display: block !important;
+    margin: 20px auto !important;
+    border-radius: 10px !important;
+    object-fit: cover !important;
+    overflow: hidden !important;
+}
+
+.article figure {
+    display: flex !important;
+    max-width: 80% !important;
+    width: auto !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+    text-align: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.article figure img {
+    width: 80% !important;
+    height: auto !important;
+    max-width: 80% !important;
+    display: inline-block !important;
+    margin: 0 auto !important;
+    border-radius: 10px !important;
+    object-fit: cover !important;
+}
+
+.article-summary img {
+    max-width: 80% !important;
+    height: auto !important;
+    margin: 10px auto !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Footer */
+
+#footer {
+    text-align: center;
 }
 
 /* Media query for phone screens */
@@ -181,8 +224,7 @@ h2 {
 
     #content-box {
         grid-template-columns: 1fr; /* Single column layout for small screens */
-        width: 100%;
-        padding: 10px;
+        min-width: 90%;
     }
 
     .article {
@@ -265,6 +307,7 @@ h2 {
 
     .article {
         padding: 15px;
+        margin: 0 0 15px 0;
     }
 
     .article a {

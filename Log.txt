@@ -1,0 +1,10 @@
+To Do:
+
+-fix margins/padding for tech news page
+
+-fix menu width on index.html page
+
+-adjust width and text-size on all pages
+
+-add more rss channels and program shuffle
+

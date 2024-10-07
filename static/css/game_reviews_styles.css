@@ -194,6 +194,12 @@ h2 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
+/* Footer */
+
+#footer {
+    text-align: center;
+}
+
 /* Media query for phone screens */
 @media (max-width: 600px) {
     header {
@@ -215,8 +221,7 @@ h2 {
 
     #content-box {
         grid-template-columns: 1fr; /* Single column layout for small screens */
-        width: 100%;
-        padding: 10px;
+        min-width: 90%;
     }
 
     .article {

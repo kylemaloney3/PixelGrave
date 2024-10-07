@@ -109,7 +109,7 @@ h2 {
     grid-template-columns: 1fr;
     grid-gap: 20px;
     max-width: 80%;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 20px;
     background-color: #62636f;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -222,6 +222,12 @@ h2 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
+/* Footer */
+
+#footer {
+    text-align: center;
+}
+
 /* Media query for phone screens */
 @media (max-width: 600px) {
     header {
@@ -243,6 +249,7 @@ h2 {
 
     #content-box {
         grid-template-columns: 1fr; /* Single column layout for small screens */
+        min-width: 90%;
     }
 
     .article {

@@ -3,10 +3,9 @@ from flask import Flask, render_template
 import feedparser
 from bs4 import BeautifulSoup
 
-
 app = Flask(__name__)
 
-# RSS feeds #
+# RSS feeds
 
 game_reviews_rss_urls = [
     'https://feeds.feedburner.com/ign/video-reviews',
@@ -33,14 +32,14 @@ game_articles_rss_urls = [
 
 def add_paragraphs(content):
     if '</p><p dir="ltr">' in content:
-        content = content.replace('</p><p dir="ltr">', '</p> <p dir="ltr">')
+        content = content.replace('</p> <p dir="ltr">', '</p> <p dir="ltr">')
     return content
 
 def clean_html(content):
     soup = BeautifulSoup(content, 'html.parser')
     return str(soup)
 
-# Fetch articles #
+# Fetch articles
 
 def fetch_articles(rss_urls, include_video=False):
     articles = []
@@ -48,34 +47,28 @@ def fetch_articles(rss_urls, include_video=False):
         feed = feedparser.parse(url)
         for entry in feed.entries:
             summary = entry.summary
-            formatted_summary = add_paragraphs(summary)  # Format the summary with paragraphs
-
-            # Clean the HTML content
+            formatted_summary = add_paragraphs(summary)
             cleaned_summary = clean_html(formatted_summary)
-
             article = {
                 'title': entry.title,
                 'link': entry.link,
-                'summary': cleaned_summary,  # Use cleaned summary here
+                'summary': cleaned_summary,
+                'published': entry.published_parsed,
                 'thumbnail': None,
                 'video': None
             }
-
-            # Handle media content
             if 'media_thumbnail' in entry and entry.media_thumbnail:
                 article['thumbnail'] = entry.media_thumbnail[0].get('url', None)
             elif 'media_content' in entry:
                 for media in entry.media_content:
                     if media.get('type') == 'image/png' or media.get('type') == 'image/jpeg':
                         article['thumbnail'] = media.get('url')
-                    elif include_video and media.get('type') == 'video/mp4':
+                    elif include_video and 'video/mp4' in media.get('type', ''):
                         article['video'] = media.get('url')
-
             articles.append(article)
-    return articles
+    return sorted(articles, key=lambda x: x['published'], reverse=True)
 
-
-# Routing pages #
+# Routing pages
 
 @app.route('/')
 def home():

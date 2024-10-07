@@ -169,11 +169,50 @@ h2 {
 }
 
 #article-img {
-    width: 100%;
-    max-width: 640px;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    width: 80% !important; /* Ensure images fit within the article */
+    max-width: 80% !important;
+    height: auto !important;
+    max-height: 550px !important;
+    display: block !important;
+    margin: 20px auto !important;
+    border-radius: 10px !important;
+    object-fit: cover !important;
+    overflow: hidden !important;
+}
+
+.article figure {
+    display: flex !important;
+    max-width: 80% !important;
+    width: auto !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+    text-align: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.article figure img {
+    width: 80% !important;
+    height: auto !important;
+    max-width: 80% !important;
+    display: inline-block !important;
+    margin: 0 auto !important;
+    border-radius: 10px !important;
+    object-fit: cover !important;
+}
+
+.article-summary img {
+    max-width: 80% !important;
+    height: auto !important;
+    margin: 10px auto !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Footer */
+
+#footer {
+    text-align: center;
 }
 
 /* Media query for phone screens */
@@ -189,6 +228,7 @@ h2 {
 
     .dropdown {
         display: block; /* Show dropdown on mobile */
+        min-width: 100%;
     }
 
     h2 {
@@ -198,8 +238,7 @@ h2 {
 
     #content-box {
         grid-template-columns: 1fr; /* Single column layout for small screens */
-        width: 100%;
-        padding: 10px;
+        min-width: 90%;
     }
 
     .article {
@@ -239,6 +278,7 @@ h2 {
 
     .article {
         padding: 15px;
+        margin: 0 0 15px 0;
     }
 
     .article a {
