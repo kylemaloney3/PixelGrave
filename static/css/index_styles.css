@@ -112,18 +112,18 @@ h2 {
     margin-top: 20px;
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 10px;
+    margin: 20px auto;
+    padding: 10px;
 }
 
 #content-box {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-    width: 80%;
-    max-width: 80%;
-    margin: 20px auto;
-    padding: 20px;
+    grid-gap: 5px;
+    width: 95%;
+    max-width: 95%;
+    margin: 10px auto;
+    padding: 10px 10px;
     background-color: #d2d2d2;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -132,7 +132,7 @@ h2 {
 .article {
     border-bottom: 1px solid #ddd;
     padding: 20px;
-    margin: 0;
+    margin: 10px;
     transition: background-color 0.3s, transform 0.3s;
     background-color: #fff;
     border-radius: 10px;
@@ -142,7 +142,7 @@ h2 {
 }
 
 .article:hover {
-    transform: scale(1.016);
+    transform: scale(1.01);
 }
 
 .article a {
@@ -233,17 +233,16 @@ h2 {
 
     h2 {
         font-size: 24px;
-        padding-top: 20px;
     }
 
     #content-box {
         grid-template-columns: 1fr; /* Single column layout for small screens */
-        min-width: 90%;
+        min-width: 95%;
     }
 
     .article {
         padding: 10px;
-        margin: 0 0 10px 0;
+        margin: -2px 0 2px;
     }
 
     .article a {
@@ -272,7 +271,7 @@ h2 {
 
     #content-box {
         grid-template-columns: 1fr 1fr; /* Two columns for tablets */
-        width: 90%;
+        min-width: 95%;
         padding: 15px;
     }
 

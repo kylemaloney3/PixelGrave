@@ -101,16 +101,18 @@ h2 {
     font-family: 'VT323', monospace;
     color: #ff9443;
     font-size: 48px;
-    margin-top: 20px;
+    margin: 20px auto;
+    padding: 10px;
 }
 
 #content-box {
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 20px;
-    max-width: 80%;
-    margin: 0 auto;
-    padding: 20px;
+    grid-gap: 5px;
+    width: 95%;
+    max-width: 95%;
+    margin: 10px auto;
+    padding: 10px 10px;
     background-color: #62636f;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -120,8 +122,8 @@ h2 {
 
 .article {
     border-bottom: 1px solid hsl(0, 0%, 18%) !important;
-    padding: 20px !important;
-    margin-bottom: 10px !important;
+    padding: 20px;
+    margin-bottom: 10px;
     transition: background-color 0.3s, transform 0.3s !important;
     background-color: #191925 !important;
     color: rgb(250, 250, 250) !important;
@@ -132,7 +134,7 @@ h2 {
 }
 
 .article:hover {
-    transform: scale(1.016) !important;
+    transform: scale(1.01);
 }
 
 .article > a {
@@ -185,7 +187,7 @@ h2 {
     height: 80% !important;
     max-height: 80% !important;
     display: flex !important;
-    margin: 20px auto !important;
+    margin: 0 auto 20px !important;
     border-radius: 10px !important;
     object-fit: cover !important;
     overflow: hidden !important;
@@ -249,18 +251,17 @@ h2 {
 
     #content-box {
         grid-template-columns: 1fr; /* Single column layout for small screens */
-        min-width: 90%;
+        min-width: 95%;
     }
 
     .article {
         padding: 10px;
-        margin: 0 0 10px 0;
-        font-size: 16px !important;
+        margin: -2px 0 2px;
+        font-size: 14px !important;
     }
 
     .article a {
-        font-size: 1em;
-        font-size: 20px !important;
+        font-size: 16px !important;
         text-align: center;
     }
 
@@ -328,8 +329,8 @@ h2 {
     }
 
     #content-box {
-        grid-template-columns: 1fr 1fr; /* Two columns for tablets */
-        width: 90%;
+        grid-template-columns: 1fr;
+        min-width: 95%;
         padding: 15px;
     }
 

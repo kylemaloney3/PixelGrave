@@ -2,11 +2,11 @@ import os
 from flask import Flask, render_template
 import feedparser
 from bs4 import BeautifulSoup
+import googleapiclient.discovery
 
 app = Flask(__name__)
 
 # RSS feeds
-
 game_reviews_rss_urls = [
     'https://feeds.feedburner.com/ign/video-reviews',
     'https://www.gamespot.com/feeds/reviews'
@@ -29,7 +29,6 @@ game_articles_rss_urls = [
 ]
 
 # Function to add paragraph tags
-
 def add_paragraphs(content):
     if '</p><p dir="ltr">' in content:
         content = content.replace('</p> <p dir="ltr">', '</p> <p dir="ltr">')
@@ -40,7 +39,6 @@ def clean_html(content):
     return str(soup)
 
 # Fetch articles
-
 def fetch_articles(rss_urls, include_video=False):
     articles = []
     for url in rss_urls:
@@ -57,19 +55,41 @@ def fetch_articles(rss_urls, include_video=False):
                 'thumbnail': None,
                 'video': None
             }
+            # Handle media content for higher quality thumbnails
             if 'media_thumbnail' in entry and entry.media_thumbnail:
-                article['thumbnail'] = entry.media_thumbnail[0].get('url', None)
+                thumbnails = entry.media_thumbnail
+                highest_quality_thumbnail = max(thumbnails, key=lambda t: t.get('width', 0))
+                article['thumbnail'] = highest_quality_thumbnail.get('url', None)
             elif 'media_content' in entry:
-                for media in entry.media_content:
-                    if media.get('type') == 'image/png' or media.get('type') == 'image/jpeg':
-                        article['thumbnail'] = media.get('url')
-                    elif include_video and 'video/mp4' in media.get('type', ''):
-                        article['video'] = media.get('url')
+                thumbnails = [media for media in entry.media_content if media.get('type') in ['image/png', 'image/jpeg']]
+                if thumbnails:
+                    highest_quality_thumbnail = max(thumbnails, key=lambda t: t.get('width', 0))
+                    article['thumbnail'] = highest_quality_thumbnail.get('url', None)
             articles.append(article)
     return sorted(articles, key=lambda x: x['published'], reverse=True)
 
-# Routing pages
 
+# YouTube API Functions
+YOUTUBE_API_KEY = 'AIzaSyAHBNGwssv5AAQZCRsY7vqCkeu60DqBxi4'
+YOUTUBE_API_SERVICE_NAME = 'youtube'
+YOUTUBE_API_VERSION = 'v3'
+
+def get_youtube_service():
+    return googleapiclient.discovery.build(
+        YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=YOUTUBE_API_KEY)
+
+def fetch_top_videos(youtube, max_results=35):
+    request = youtube.videos().list(
+        part="snippet,contentDetails,statistics",
+        chart="mostPopular",
+        regionCode="US",
+        videoCategoryId="20",  # Gaming category
+        maxResults=max_results
+    )
+    response = request.execute()
+    return response['items']
+
+# Routing pages
 @app.route('/')
 def home():
     articles = fetch_articles(main_articles_rss_urls)
@@ -94,6 +114,12 @@ def movie_reviews():
 def game_articles():
     articles = fetch_articles(game_articles_rss_urls)
     return render_template('game_articles.html', articles=articles)
+
+@app.route('/youtube-top-videos')
+def youtube_top_videos():
+    youtube_service = get_youtube_service()
+    videos = fetch_top_videos(youtube_service)
+    return render_template('youtube_top_videos.html', videos=videos)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
